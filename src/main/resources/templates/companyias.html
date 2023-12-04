@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Gestión de Companyias</title>
+<style>
+@import url('https://fonts.googleapis.com/css?family=Gugi|Skranji');
+
+body {
+	margin: 0 auto;
+	width: 50%;
+	font-family: 'Gugi', cursive;
+}
+
+* {
+	margin: 0 auto;
+}
+
+h1, h2 {
+	text-align: center;
+	font-size: 2.0em;
+	font-family: 'Skranji', cursive;
+	background-color: #777777;
+	color: #200D0D;
+}
+
+div>a {
+	width: 120px;
+	height: 120px;
+	flex-direction: column;
+	text-decoration: none;
+	color: #200D0D;
+	text-align: center;
+	margin: 2% 15%;
+	align-items: center;
+	justify-content: center;
+}
+
+body>a {
+	width: 120px;
+	height: 120px;
+	flex-direction: column;
+	text-decoration: none;
+	color: #200D0D;
+	text-align: center;
+	margin: 2% 35%;
+	align-items: center;
+	justify-content: center;
+}
+
+a:hover {
+	color: green;
+}
+
+.divMenu {
+	min-height: 30px;
+	text-align: center;
+	font-size: 1.0em;
+	font-family: 'Skranji', cursive;
+	background-color: #777777;
+	color: #200D0D;
+}
+
+th {
+	background-color: #777777;
+}
+
+.list {
+	min-height: 400px;
+}
+</style>
+</head>
+<body>
+	<div>
+		<br>
+		<h2 th:if="${list.isEmpty()}">No hay companyias</h2>
+		<div class="list" th:if="${!list.isEmpty()}">
+			<h2>Gestión de Compañias</h2>
+			<br>
+			<table border="1">
+				<head>
+				<th>id</th>
+				<th>Nombre</th>
+				<th>Dirección</th>
+				<th>Fax</th>
+				<th>Teléfono</th>
+				<th>Eliminar</th>
+				<th>Discos</th>
+				</head>
+				<tbody>
+					<tr th:each="companyia : ${list}">
+						<td><a
+							th:href="@{/companyias/{idCompanyia}(idCompanyia=${companyia.idCompanyia})}"
+							th:utext="${companyia.idCompanyia}"></a></td>
+						<td th:utext="${companyia.nombre}"></td>
+						<td th:utext="${companyia.direccion}"></td>
+						<td th:utext="${companyia.fax}"></td>
+						<td th:utext="${companyia.telefono}"></td>
+						<td><a
+							th:href="@{/companyias/delete/{idCompanyia}(idCompanyia=${companyia.idCompanyia})}">Eliminar</a></td>
+						<td><a
+							th:href="@{/companyias/{idCompanyia}/discos/(idCompanyia=${companyia.idCompanyia})}"
+							th:utext="Discos"></a></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<br>
+		<div class="divMenu">
+			<a th:href="@{/companyias/new}">Agregar</a> 
+			<a th:href="@{/}">Volver al índice</a>
+		</div>
+	</div>
+	<br />
+	<br />
+	<div th:if="${errorMessage}" th:utext="${errorMessage}" class="error" />
+</body>
+</html>

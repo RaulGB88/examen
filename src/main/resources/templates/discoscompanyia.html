@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Visualizar discos companyia</title>
+<style>
+@import url('https://fonts.googleapis.com/css?family=Gugi|Skranji');
+
+body {
+	margin: 0 auto;
+	width: 50%;
+	font-family: 'Gugi', cursive;
+}
+
+* {
+	margin: 0 auto;
+}
+
+h1, h2 {
+	text-align: center;
+	font-size: 2.0em;
+	font-family: 'Skranji', cursive;
+	background-color: #777777;
+	color: #200D0D;
+}
+
+div>a {
+	width: 120px;
+	height: 120px;
+	flex-direction: column;
+	text-decoration: none;
+	color: #200D0D;
+	text-align: center;
+	margin: 2% 15%;
+	align-items: center;
+	justify-content: center;
+}
+
+body>a {
+	width: 120px;
+	height: 120px;
+	flex-direction: column;
+	text-decoration: none;
+	color: #200D0D;
+	text-align: center;
+	margin: 2% 35%;
+	align-items: center;
+	justify-content: center;
+}
+
+a:hover {
+	color: green;
+}
+
+.divMenu {
+	min-height: 30px;
+	text-align: center;
+	font-size: 1.0em;
+	font-family: 'Skranji', cursive;
+	background-color: #777777;
+	color: #200D0D;
+}
+</style>
+</head>
+<body>
+	<div>
+		<div class="list" th:if="${list.isEmpty()}">
+			<h2 th:if="${list.isEmpty()}">
+				No hay discos para el companyia <span th:utext="${companyia.nombre}"></span>
+				<span th:utext="${companyia.nombre}"></span>
+			</h2>
+		</div>
+		<div class="list" th:if="${!list.isEmpty()}">
+			<h1>
+				Mantenimiento de discos de <span th:utext="${companyia.nombre}"></span>
+				<span th:utext="${companyia.nombre}"></span>
+			</h1>
+			<table border="1">
+				<head>
+				<th>ID</th>
+				<th>Nombre</th>
+				<th>Fecha</th>
+				<th>Eliminar</th>
+				<th>Visualizar canciones</th>
+				</head>
+				<tr th:each="disco : ${list}">
+					<td th:utext="${disco.idDisco}"></td>
+					<td th:utext="${disco.nombre}"></td>
+					<td th:utext="${disco.fecha}"></td>
+					<td><a th:href="@{/discos/{idDisco}/delete/(idDisco=${disco.idDisco})}">Eliminar</a></td>
+					<td><a th:href="@{/discos/{idDisco}/canciones/(idDisco=${disco.idDisco})}">Visualizar canciones</a></td>
+				</tr>
+			</table>
+		</div>
+		<br /> <br />
+		<div class="divMenu">
+			<a th:href="@{/companyias/{idCompanyia}/discos/new (idCompanyia=${companyia.idCompanyia})}">Agregar</a> 
+			<a th:href="@{/companyias}">Volver a la lista de companyias</a>
+		</div>
+		<br /> <br />
+		<div th:if="${errorMessage}" th:utext="${errorMessage}" class="error" />
+	</div>
+</body>
+</html>
