@@ -1,0 +1,106 @@
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title
+	th:utext="${add} ? 'Crear una companyia' : 'Editar una companyia'" />
+<style>
+@import url('https://fonts.googleapis.com/css?family=Gugi|Skranji');
+
+body {
+	margin: 0 auto;
+	width: 50%;
+	font-family: 'Gugi', cursive;
+}
+
+* {
+	margin: 0 auto;
+}
+
+h1, h2 {
+	text-align: center;
+	font-size: 2.0em;
+	font-family: 'Skranji', cursive;
+	background-color: #777777;
+	color: #200D0D;
+}
+
+a {
+	width: 120px;
+	height: 120px;
+	flex-direction: column;
+	text-decoration: none;
+	color: #200D0D;
+	text-align: center;
+	margin: 2% 15%;
+	align-items: center;
+	justify-content: center;
+}
+
+body>a {
+	width: 120px;
+	height: 120px;
+	flex-direction: column;
+	text-decoration: none;
+	color: #200D0D;
+	text-align: center;
+	margin: 2% 35%;
+	align-items: center;
+	justify-content: center;
+}
+
+form>input {
+	width: 100px;
+	margin: 2% 20%;
+}
+
+a:hover {
+	color: green;
+}
+
+.divMenu {
+	min-height: 30px;
+	text-align: center;
+	font-size: 1.0em;
+	font-family: 'Skranji', cursive;
+	background-color: #777777;
+	color: #200D0D;
+}
+
+.error {
+	color: red;
+}
+</style>
+</head>
+<body>
+	<h1>Crear un disco</h1>
+	<br />
+	<br />
+	<form th:action="@{/companyias/{idCompanyia}/discos/save (idCompanyia=${companyiadto.idCompanyia})}" th:object="${discodto}"
+		method="POST">
+		<table border="0">
+
+			<tr>
+				<td>Nombre</td>
+				<td>:</td>
+				<td><input type="text" th:field="*{nombre}"></td>
+			</tr>
+			<tr>
+				<td>Fecha</td>
+				<td>:</td>
+				<td><input type="text" th:field="*{fecha}" maxlength="100"></td>
+			</tr>
+		</table>
+		<input type="submit" th:value="Crear">
+	</form>
+	<br />
+	<br />
+	<div class="divMenu">
+		<a th:href="@{/companyias/{idCompanyia}/discos (idCompanyia=${discodto.companyiadto.idCompanyia})}">Volver a la lista de discos</a>
+	</div>
+	<br />
+	<br />
+	<div th:if="${error}" th:utext="${errorMessage}" class="error" />
+</body>
+</html>

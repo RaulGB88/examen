@@ -1,0 +1,74 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8" />
+	<title th:utext="${titulo}" />
+	<style>
+@import url('https://fonts.googleapis.com/css?family=Gugi|Skranji');
+
+body {
+	margin: 0 auto;
+	width: 50%;
+	font-family: 'Gugi', cursive;
+}
+
+* {
+	margin: 0 auto;
+}
+
+h1, h2 {
+	text-align: center;
+	font-size: 2.0em;
+	font-family: 'Skranji', cursive;
+	background-color: #777777;
+	color: #200D0D;
+}
+
+div>a {
+	width: 120px;
+	height: 120px;
+	flex-direction: column;
+	text-decoration: none;
+	color: #200D0D;
+	text-align: center;
+	margin: 2% 15%;
+	align-items: center;
+	justify-content: center;
+}
+
+body>a {
+	width: 120px;
+	height: 120px;
+	flex-direction: column;
+	text-decoration: none;
+	color: #200D0D;
+	text-align: center;
+	margin: 2% 35%;
+	align-items: center;
+	justify-content: center;
+}
+
+a:hover {
+	color: green;
+}
+
+.divMenu {
+	min-height: 30px;
+	text-align: center;
+	font-size: 1.0em;
+	font-family: 'Skranji', cursive;
+	background-color: #777777;
+	color: #200D0D;
+}
+</style>
+</head>
+
+<body>
+	<h1 th:utext="${titulo}" />
+	<a th:href="@{/companyias}">Gestión de compañias</a>
+	<br />
+	<br />
+
+	<div><p th:utext="${nombreAsignatura}"/></div>
+</body>
+</html>
